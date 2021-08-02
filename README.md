@@ -1,2 +1,2 @@
 # knock
- Um simples port scan
+Simple portscan using python socket module
