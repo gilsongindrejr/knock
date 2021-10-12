@@ -33,16 +33,12 @@ def port_knocker(ip, ports, proto):
         if initial_port > final_port:
             print(Fore.RED + 'Initial port must be lower than final port')
         else:
-            while 1:
-                if proto == 'TCP':
-                    s = socket(AF_INET, SOCK_STREAM)
-                    break
-                elif proto == 'UDP':
-                    s = socket(AF_INET, SOCK_DGRAM)
-                    break
-                else:
-                    print(Fore.RED + 'Invalid protocol')
-                    return 0
+            if proto == 'TCP':
+                s = socket(AF_INET, SOCK_STREAM)
+            elif proto == 'UDP':
+                s = socket(AF_INET, SOCK_DGRAM)
+            else:
+                print(Fore.RED + 'Invalid protocol')
             while initial_port != final_port + 1:
                 if s.connect_ex((ip_addr, initial_port)) == 0:
                     s.close()
