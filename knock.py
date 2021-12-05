@@ -14,18 +14,25 @@ from colorama import Fore
 banner = pyfiglet.figlet_format('Knock!', font='5lineoblique')
 
 
-parser = argparse.ArgumentParser(prog='Knock', usage='knock -ip <IP ADDRESS> -p <PORT-PORT> --proto <TCP/UDP>',
-                                 description='Scan for open ports on target IP.')
+parser = argparse.ArgumentParser(
+    prog='Knock',
+    usage='knock -ip <IP ADDRESS> -p <PORT-PORT> --proto <TCP/UDP>',
+    description='Scan for open ports on target IP.'
+)
+
 parser.add_argument('-ip', help='IP address', type=str, required=True)
 parser.add_argument('-p', help='Port range (port-port)', type=str, required=True)
 parser.add_argument('--proto', help='Protocol (TCP/UDP)', type=str, required=True)
 args = parser.parse_args()
 
 
-def port_knocker(ip, ports, proto):
+def print_banner():
     print(banner)
     print(__version__)
     print()
+
+
+def port_knocker(ip, ports, proto):
     initial_port = int(ports.split('-')[0])
     final_port = int(ports.split('-')[1])
     try:
@@ -51,4 +58,5 @@ def port_knocker(ip, ports, proto):
 
 
 if __name__ == '__main__':
+    print_banner()
     port_knocker(ip=args.ip, ports=args.p, proto=args.proto)
